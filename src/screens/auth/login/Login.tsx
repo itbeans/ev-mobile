@@ -284,7 +284,6 @@ export default class Login extends BaseScreen<Props, State> {
           return (
             <SafeAreaView style={style.container}>
               {showNoTenantFoundDialog && this.renderNoTenantFoundDialog()}
-              <Text style={style.applicationTitle}>open e-mobility</Text>
               <TouchableOpacity onPress={() => this.goToTenants()} style={style.tenantSelectionContainer}>
                 <AuthHeader navigation={this.props.navigation} tenantName={tenantName} tenantLogo={tenantLogo} />
                 <Icon style={style.dropdownIcon} size={scale(25)} as={MaterialIcons} name={'arrow-drop-down'} />
@@ -334,7 +333,7 @@ export default class Login extends BaseScreen<Props, State> {
                   onChangeText={(newPassword: string) => this.setState({password: newPassword})}
                 />
                 <CheckBox
-                  containerStyle={formStyle.checkboxContainer}
+                  containerStyle={[formStyle.checkboxContainer, style.checkboxContainer]}
                   textStyle={{backgroundColor: 'transparent'}}
                   checked={eula}
                   onPress={() => this.setState({ eula: !eula })}

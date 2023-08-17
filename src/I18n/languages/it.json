@@ -23,6 +23,7 @@
     "clear": "Pulisci",
     "close": "Chiudi",
     "apply": "Applica",
+    "confirm": "Confirm",
     "cancel": "Cancella",
     "send": "Invio",
     "version": "Versione",
@@ -86,7 +87,9 @@
     "showLess": "Show less",
     "newEntry": "New entry",
     "userOrTenantUpdated": "Sei stato disconnesso perchè le impostazioni del tuo profilo o della tua organizzazione sono state aggiornate",
-    "tenantRedirectionInvalidDomain": "Invalid tenant redirection domain"
+    "tenantRedirectionInvalidDomain": "Invalid tenant redirection domain",
+    "from": "Da",
+    "to": "A"
   },
   "sidebar": {
     "home": "Home",
@@ -232,7 +235,7 @@
     "deletePaymentMethodSubtitle": "Do you really want to delete the {{cardBrand}} card ending with {{cardLast4}} ?",
     "addPaymentMethod": "Add Payment Method",
     "paymentMethodCreationRules": "For security reasons, we do not store nor process your bank and card details directly. The collected information is sent via a secure channel to our STRIPE partner which provides the billing and payment infrastructure.",
-    "paymentMethodsCreationCheckboxText": " I have read the End-user License Agreement and agree that my bank details will be used for paying future EV Charging Sessions."
+    "paymentMethodsCreationCheckboxText": "I have read the End-user License Agreement and agree that my bank details will be used for paying future EV Charging Sessions."
   },
   "paymentMethodStatus": {
     "valid": "Valid",
@@ -270,7 +273,7 @@
     "addCarButton": "Ajouter",
     "evse_phase": "Fase",
     "evse_phases": "Fasi",
-    "invalidVIN": "Invalid VIN",
+    "invalidVIN": "Must be 17 char. long including digits and capital letters",
     "invalidLicensePlate": "Invalid License Plate",
     "licensePlate": "Targa",
     "converter": "Converter",
@@ -330,7 +333,12 @@
     "selectChargeCard": "Select Charge Card",
     "chargingSettings": "Charging settings",
     "adviceMessage": "Ensure that the cable is connected",
-    "sessionAlreadyInProgressError": "A session is already in progress on this connector"
+    "sessionAlreadyInProgressError": "A session is already in progress on this connector",
+    "departureTime": "Departure time",
+    "targetStateOfCharge": "Target state of charge",
+    "currentStateOfCharge": "Current state of charge",
+    "initialStateOfCharge": "Initial state of charge",
+    "stateOfCharge": "State of charge"
   },
   "home": {
     "browseSites": "Siti",

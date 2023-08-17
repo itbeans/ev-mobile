@@ -167,16 +167,16 @@ export default class I18nManager {
     try {
       const parts = Intl.NumberFormat(locale, options).formatToParts(value);
       // Compute the compact (prefix) if needed (Intl namespace does not supports metric compacts yet)
-      let compact = this.getNumberFormatPartValue(parts, NumberFormatSymbolsEnum.COMPACT);
+      let compact = this.getFormatPartValue(parts, NumberFormatSymbolsEnum.COMPACT);
       if (compact && options.compactStyle === NumberFormatCompactStyleEnum.METRIC) {
         compact = this.computeMetricCompact(value);
       }
       return {
         value: this.concatenateNumberFormatParts(parts),
-        ...(isCurrency && {currency: this.getNumberFormatPartValue(parts, NumberFormatSymbolsEnum.CURRENCY)}),
-        ...(isUnit && {unit: this.getNumberFormatPartValue(parts, NumberFormatSymbolsEnum.UNIT)}),
+        ...(isCurrency && {currency: this.getFormatPartValue(parts, NumberFormatSymbolsEnum.CURRENCY)}),
+        ...(isUnit && {unit: this.getFormatPartValue(parts, NumberFormatSymbolsEnum.UNIT)}),
         ...(compact && {compact}),
-        ...(isPercent && {percentSign: this.getNumberFormatPartValue(parts, NumberFormatSymbolsEnum.PERCENT_SIGN)})
+        ...(isPercent && {percentSign: this.getFormatPartValue(parts, NumberFormatSymbolsEnum.PERCENT_SIGN)})
       };
     } catch ( e ) {
       return null;
@@ -213,7 +213,7 @@ export default class I18nManager {
     }
   }
 
-  public static formatDateTime(value: Date, options?: Intl.DateTimeFormatOptions ): string {
+  public static formatDateTime(value: Date | string, options?: Intl.DateTimeFormatOptions ): string {
     if (I18nManager.isValidDate(value)) {
       return Intl.DateTimeFormat(i18n.locale, options).format(new Date(value));
     }
@@ -231,7 +231,7 @@ export default class I18nManager {
     return formatter.format(durationSecs);
   }
 
-  private static isValidDate(date: Date): boolean {
+  public static isValidDate(date: Date | string): boolean {
     return !isNaN(new Date(date).getTime());
   }
 
@@ -243,7 +243,7 @@ export default class I18nManager {
       .trim();
   }
 
-  static getNumberFormatPartValue(parts: Intl.NumberFormatPart[], type: string) {
+  static getFormatPartValue(parts: (Intl.DateTimeFormatPart | Intl.NumberFormatPart)[], type: Intl.DateTimeFormatPartTypes | Intl.NumberFormatPartTypes) {
     return parts.find((p) => p.type === type)?.value;
   }
 
@@ -275,5 +275,12 @@ export default class I18nManager {
         distanceYard < 1760 ? `${I18nManager.formatNumber(distanceYard, {maximumFractionDigits: 0})} yd` : `${I18nManager.formatNumber(distanceYard / 1760, {maximumFractionDigits: 1})} mi`
       );
     }
+  }
+
+  public static isLocale24Hour(locale: string): boolean {
+    locale = locale.replace('_', '-');
+    const parts = new Intl.DateTimeFormat(locale, {timeStyle: 'short', dateStyle: 'short'}).formatToParts(new Date());
+    const dayPeriod = I18nManager.getFormatPartValue(parts, 'dayPeriod');
+    return !dayPeriod;
   }
 }
